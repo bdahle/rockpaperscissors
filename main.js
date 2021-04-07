@@ -33,6 +33,11 @@ let playRound = (playerSelection, computerSelection) => {
     return "You lose! " + computerSelection + " beats " + playerSelection;
   }
 };
-//You lose
 
-console.log(playRound("PAPer", computerPlay()));
+let playGame = (rounds) => {
+  for (i = 0; i < rounds; i++) {
+    console.log(playRound(prompt(), computerPlay()));
+  }
+};
+
+playGame(5);
