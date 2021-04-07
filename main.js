@@ -27,7 +27,12 @@ let playRound = (playerSelection, computerSelection) => {
       winner = computerSelection === "ROCK" ? "Computer" : "Player";
       break;
   }
-  return winner + " won!";
+  if (winner === "Player") {
+    return "You win! " + playerSelection + " beats " + computerSelection;
+  } else if (winner === "Computer") {
+    return "You lose! " + computerSelection + " beats " + playerSelection;
+  }
 };
+//You lose
 
 console.log(playRound("PAPer", computerPlay()));
