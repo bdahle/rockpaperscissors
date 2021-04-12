@@ -11,6 +11,7 @@ let playRound = (playerSelection, computerSelection) => {
   computerSelection = computerSelection.toUpperCase();
   console.log("Player: " + playerSelection);
   console.log("Computer: " + computerSelection);
+
   // compare player selection and computer selection
   if (playerSelection === computerSelection) {
     return "Draw!";
@@ -34,10 +35,11 @@ let playRound = (playerSelection, computerSelection) => {
   }
 };
 
-let playGame = (rounds) => {
-  for (i = 0; i < rounds; i++) {
-    console.log(playRound(prompt(), computerPlay()));
-  }
-};
-
-playGame(5);
+const buttons = document.querySelectorAll("button");
+console.log(buttons);
+buttons.forEach((button) => {
+  button.addEventListener("click", function () {
+    console.log(this);
+    console.log(playRound(this.textContent, computerPlay()));
+  });
+});
