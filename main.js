@@ -5,6 +5,10 @@ let computerPlay = () => {
   return options[random];
 };
 
+let playerScore = 0;
+let computerScore = 0;
+let winner;
+
 // take two parameters
 let playRound = (playerSelection, computerSelection) => {
   playerSelection = playerSelection.toUpperCase();
@@ -16,7 +20,6 @@ let playRound = (playerSelection, computerSelection) => {
   if (playerSelection === computerSelection) {
     return "Draw!";
   }
-  let winner;
   switch (playerSelection) {
     case "ROCK":
       winner = computerSelection === "PAPER" ? "Computer" : "Player";
@@ -29,17 +32,25 @@ let playRound = (playerSelection, computerSelection) => {
       break;
   }
   if (winner === "Player") {
+    playerScore++;
     return "You win! " + playerSelection + " beats " + computerSelection;
   } else if (winner === "Computer") {
+    computerScore++;
     return "You lose! " + computerSelection + " beats " + playerSelection;
   }
 };
 
 const buttons = document.querySelectorAll("button");
-console.log(buttons);
+const thisRoundResult = document.querySelector("h2");
+const standings = document.querySelector("h3");
+const winnerAnnouncement = document.querySelector("h4");
 buttons.forEach((button) => {
   button.addEventListener("click", function () {
-    console.log(this);
-    console.log(playRound(this.textContent, computerPlay()));
+    thisRoundResult.textContent = playRound(this.textContent, computerPlay());
+    standings.textContent =
+      "Player: " + playerScore + "     Computer: " + computerScore;
+    if (playerScore >= 5 || computerScore >= 5) {
+      winnerAnnouncement.textContent = winner + " wins the game!";
+    }
   });
 });
